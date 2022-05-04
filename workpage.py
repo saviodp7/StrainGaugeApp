@@ -5,11 +5,14 @@ from channels import ChannelsFrame
 
 class WorkPage(ttk.Frame):
 
-    def __init__(self, container, com_port, number_of_channels, tempo_di_misura, smp_time):
+    def __init__(self, master, container, com_port, number_of_channels, intervallo_di_misura, periodo_di_campionamento):
         super().__init__(container)
 
+        master.geometry("1400x" + str(int(number_of_channels) * 300))
+        self.pack(fill="both", expand=True)
+
         # Frame canali
-        self.channels = ChannelsFrame(self, com_port, number_of_channels, tempo_di_misura, smp_time)
+        self.channels = ChannelsFrame(self, com_port, number_of_channels, intervallo_di_misura, periodo_di_campionamento)
         self.channels.pack(side="left", fill="both", expand=True)
 
         # Frame comandi

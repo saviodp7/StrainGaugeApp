@@ -18,7 +18,7 @@ matplotlib.use("TkAgg")
 
 class ChannelsFrame(ttk.Frame):
 
-    def __init__(self, container, com_port, number_of_channels, tempo_di_misura, smp_time):
+    def __init__(self, container, com_port, number_of_channels, intervallo_di_misura, periodo_di_campionamento):
         super().__init__(container)
 
         # Modulo comunicazione con Arduino
@@ -27,7 +27,7 @@ class ChannelsFrame(ttk.Frame):
         # Variabili
         self.running = True
         self.number_of_channels = int(number_of_channels)
-        self.smp_time = int(smp_time)
+        self.periodo_di_campionamento = int(periodo_di_campionamento)
         # Nomi canali
         self.channels_names = list()
         self.channel_name_entrys = list()
@@ -40,7 +40,7 @@ class ChannelsFrame(ttk.Frame):
         self.channels_min_value = list()
         self.channels_max_value = list()
         # Assi canali
-        self.channels_x = np.arange(0, int(tempo_di_misura), self.smp_time/1000).tolist()
+        self.channels_x = np.arange(0, int(intervallo_di_misura), self.periodo_di_campionamento/1000).tolist()
         self.channels_y = list()
 
         # FRAMES
@@ -73,7 +73,7 @@ class ChannelsFrame(ttk.Frame):
             # Crezione grafico e linea animata
             self.plots.append(plt.subplot(number_of_channels, 1, channel_number+1))
             self.plots[channel_number].set_ylim(-1, 1)
-            self.plots[channel_number].set_xlim(0, int(tempo_di_misura))
+            self.plots[channel_number].set_xlim(0, int(intervallo_di_misura))
             line, = self.plots[channel_number].plot([], [], lw=2)
             self.lines.append(line)
             # Creazione variabili valori (rt, min, max, y)
@@ -105,8 +105,9 @@ class ChannelsFrame(ttk.Frame):
         # Aggiornamento grafico
         self.canvas.draw()
         # Variabile di animazione
-        self.ani = FuncAnimation(self.fig, self.animate, interval=self.smp_time/5, blit=True)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=self.periodo_di_campionamento/5, blit=True)
 
+        self.tara()
         self.reset()
 
     def animate(self, i):
@@ -142,7 +143,7 @@ class ChannelsFrame(ttk.Frame):
         self.puller.pull()
 
     def reset(self):
-        """Funzione reset grafico e misurazione"""
+        """Funzione reset del grafico e della misurazione"""
         for channel_number in range(self.number_of_channels):
             self.channels_y[channel_number] = [0]*len(self.channels_x)
             self.channels_min_value[channel_number].set(0)

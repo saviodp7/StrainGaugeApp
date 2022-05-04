@@ -1,6 +1,5 @@
 import serial
 
-
 class ArduinoPuller:
 
     def __init__(self, com_port):
@@ -14,6 +13,7 @@ class ArduinoPuller:
     def pull(self):
         values = self.ser.readline().decode('ascii').strip()
         values = values.split(',')
+        print(values)
         return values
 
     def flush(self):
