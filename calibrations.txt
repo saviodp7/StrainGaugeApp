@@ -1,6 +1,1 @@
-bilancia_aerodinamica,120,150
-bilancia_termobarica,140,150
-
- calib_disco,1125970.00,-8400.00
-calibdischi2,1123610.00,-9400.00
-cal1,1123681.00,-9150.00
+calib_disco,1125970.00,-8400.00
