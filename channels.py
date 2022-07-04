@@ -71,7 +71,7 @@ class ChannelsFrame(ttk.Frame):
 
             self.channel_name_frame.pack(fill="y", expand=True)
             # Crezione grafico e linea animata
-            self.plots.append(plt.subplot(number_of_channels, 1, channel_number+1))
+            self.plots.append(plt.subplot(self.number_of_channels, 1, channel_number+1))
             self.plots[channel_number].set_ylim(-1, 1)
             self.plots[channel_number].set_xlim(0, int(tempo_di_misura))
             line, = self.plots[channel_number].plot([], [], lw=2)

@@ -1,16 +1,20 @@
 import tkinter as tk
 from tkinter import ttk
 from channels import ChannelsFrame
+import serial
 
 
 class WorkPage(ttk.Frame):
 
-    def __init__(self, container, com_port, number_of_channels, tempo_di_misura, smp_time):
+    def __init__(self, master, container, **kwargs):
         super().__init__(container)
 
+        self.master = master
+
         # Frame canali
-        self.channels = ChannelsFrame(self, com_port, number_of_channels, tempo_di_misura, smp_time)
+        self.channels = ChannelsFrame(self, kwargs['com_port'], kwargs['number_of_channels'], kwargs['tempo_di_misura'], kwargs['smp_time'])
         self.channels.pack(side="left", fill="both", expand=True)
+        self.master.geometry("1400x" + str(int(kwargs['number_of_channels']) * 300))
 
         # Frame comandi
         self.commands_frame = ttk.Frame(self)
