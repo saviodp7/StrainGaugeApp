@@ -6,3 +6,4 @@ Librerie necessarie:
 * matplotlib
 * xlsxwriter
 * pyserial
+* pillow
