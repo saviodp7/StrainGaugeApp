@@ -2,6 +2,10 @@
 
 Welcome to the Strain Gauge Data Acquisition Application repository. This application is designed to facilitate the acquisition and visualization of data from four strain gauges. It offers real-time data visualization, calibration, and data export functionalities.
 
+<p align="center">
+  <img src="images/setup.png" alt="Strain Gauge Setup" width="600" />
+</p>
+
 ## Features
 
 - **Real-Time Data Visualization**: View data from four strain gauges in real-time.
